@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hamburger</title>
+    
+</head>
+
+<body>
+    <div class="container">
+        <form class='my-form' action="">
+            <p>Choose the size of the Burger.</p>
+            <input type="radio" checked = 'check' class='size' name='burger' id='hammBig' value='big'><label for='hammBig'>Big</label>
+            <input type="radio" class='size' name='burger' id='hammSmall' value='small'><label for='hammSmall'>Small</label><br/>
+            <p>Choose filling</p>
+            <label><input class = 'filling' type="checkbox" value='Cheese'>Cheese</label>
+            <label><input class = 'filling' type="checkbox" value='Salad'>Salad</label>
+            <label><input class = 'filling' type="checkbox" value='Potato'>Potato</label>
+            <p>Choose spice</p>
+            <label><input class = 'spice' type="checkbox" value='Mayonnaise'>Mayonnaise</label>
+            <label><input class = 'spice' type="checkbox" value='Spice'>Spice</label><br/>
+        </form>
+        <button>Get price & callories</button>
+        <p id='price_callories'></p>
+    </div>
+    <script>
+        'use strict';
+        
+ class Hamburger {
+            constructor(size, filling, spice) {
+                this.size = size;
+                this.filling = filling;
+                this.spice = spice;
+            }
+            initPrice() {
+                let price = 0;
+                for (let vall of this.size) {
+                    if (vall.checked) {
+                        switch (vall.value) {
+                            case 'small':
+                                price += 50;
+                                break;
+                            case 'big':
+                                price += 100;
+                                break;
+                        }
+                    }
+                }
+                for (let vall of this.filling) {
+                    if (vall.checked) {
+                        switch (vall.value) {
+                            case 'Cheese':
+                                price += 10;
+                                break;
+                            case 'Salad':
+                                price += 20;
+                                break;
+                            case 'Potato':
+                                price += 15;
+                                break;
+                        }
+                    }
+                }
+                for (let vall of this.spice) {
+                    if (vall.checked) {
+                        switch (vall.value) {
+                            case 'Mayonnaise':
+                                price += 20;
+                                break;
+                            case 'Spice':
+                                price += 15;
+                                break;
+                        }
+                    }
+
+                }
+                return price;
+            }
+
+            initCallories() {
+                let callories = 0;
+                for (let vall of this.size) {
+                    if (vall.checked) {
+                        switch (vall.value) {
+                            case 'small':
+                                callories += 20;
+                                break;
+                            case 'big':
+                                callories += 40;
+                                break;
+                        }
+                    }
+                }
+
+
+                for (let vall of this.filling) {
+                    if (vall.checked) {
+                        switch (vall.value) {
+                            case 'Cheese':
+                                callories += 20;
+                                break;
+                            case 'Salad':
+                                callories += 5;
+                                break;
+                            case 'Potato':
+                                callories += 10;
+                                break;
+                        }
+                    }
+                }
+                for (let vall of this.spice) {
+                    if (vall.checked) {
+                        switch (vall.value) {
+                            case 'Mayonnaise':
+                                callories += 5;
+                                break;
+                            case 'Spice':
+                                callories += 0;
+                                break;
+                        }
+                    }
+
+                }
+                return callories;
+            }
+        }
+
+        document.querySelector('button').addEventListener('click', function() {
+            let size = document.querySelectorAll('.size');
+            let filling = document.querySelectorAll('.filling');
+            let spice = document.querySelectorAll('.spice');
+
+            var hamburger = new Hamburger(size, filling, spice);
+
+            return document.querySelector('#price_callories').innerHTML = `Total price: ${hamburger.initPrice()} and Total callories: ${hamburger.initCallories()} `;
+        })
+
+    </script>
+</body>
+
+
+</html>
